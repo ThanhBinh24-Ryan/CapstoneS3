@@ -1,0 +1,83 @@
+/* Wrapper chứa toàn bộ form */
+.form-wrapper {
+    display: flex;
+    justify-content: center; /* Căn giữa chiều ngang */
+    align-items: center; /* Căn giữa chiều dọc */
+    height: 100vh; /* Chiều cao của form chiếm toàn bộ màn hình */
+    background-color: #f4f4f4; /* Màu nền nhẹ nhàng */
+  }
+  
+  /* Form chính */
+  .form-container {
+    background-color: #fff; /* Màu nền trắng cho form */
+    padding: 30px 40px; /* Khoảng cách padding bên trong form */
+    border-radius: 8px; /* Bo góc cho form */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Thêm hiệu ứng box-shadow */
+    width: 100%;
+    max-width: 400px; /* Đặt độ rộng tối đa cho form */
+  }
+  
+  /* Định dạng cho các label và input */
+  .form-container label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .form-container input:focus {
+    border-color: #007bff; /* Màu khi input được focus */
+    outline: none;
+  }
+  
+  /* Hiển thị thông báo lỗi */
+  .error-message {
+    color: #ff4d4f; /* Màu đỏ cho thông báo lỗi */
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  /* Nút đăng ký */
+  .form-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .form-container button:hover {
+    background-color: #0056b3; /* Thay đổi màu khi hover */
+  }
+  
+  /* Nút đăng nhập */
+  .form-container .login-link {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .form-container .login-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .form-container .login-link a:hover {
+    text-decoration: underline;
+  }
+  
