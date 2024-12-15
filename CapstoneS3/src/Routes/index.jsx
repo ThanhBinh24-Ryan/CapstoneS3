@@ -14,7 +14,7 @@ import IndexDSND from "../Pages/Admin/LayDSNguoiDung/IndexDSNguoiDung";
 import RenderDSND from "../Pages/Admin/LayDSNguoiDung/RenderDSNguoiDung";
 import AddUserPage from "../Pages/Admin/AddUser/IndexAddUser";
 import EditUserPage from "../Pages/Admin/UpdateUser/IndexUpdateUser";
-
+import DetailMoviePage from "../Pages/User/DetailMovePage";
 
 
 const routes = [
@@ -25,6 +25,10 @@ const routes = [
       {
         path: "",
         element: TrangChu,
+      },
+      {
+        path: "detail-movie/:id",
+        element: DetailMoviePage,
       },
       // {
       //   path: "DangNhap",
@@ -85,6 +89,7 @@ const routes = [
         path: "EditUser/:taiKhoan",
         element: EditUserPage ,
       },
+    
     ],
   },
   {

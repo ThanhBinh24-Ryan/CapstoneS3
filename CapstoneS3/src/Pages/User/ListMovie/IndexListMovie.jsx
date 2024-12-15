@@ -12,7 +12,7 @@ export default function Movie({ movie }) {
       />
 
       <div className="p-5">
-        <Link to={`${movie.maPhim}`}>
+        <Link to={`/detail-movie/${movie.maPhim}`}>
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             {movie.tenPhim}
           </h5>

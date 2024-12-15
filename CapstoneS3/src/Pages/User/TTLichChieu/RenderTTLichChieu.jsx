@@ -1,62 +1,96 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import MovieItem from "../TTLichChieu/IndexTTLichChieu"; // Component hiển thị phim và cụm rạp
-import { fetchListLich } from "../TTLichChieu/Dusk/IndexDusk"; // Thao tác fetch dữ liệu
+import { fetchListLich } from "../TTLichChieu/Dusk/IndexDusk";
 
 export default function ListLich() {
   const dispatch = useDispatch();
-  
-  // Dữ liệu từ Redux Store
+
+  // Lấy dữ liệu từ Redux Store
   const { loading, data, error } = useSelector((state) => state.listLich || {});
-  
+
   useEffect(() => {
-    // Dispatch action để fetch dữ liệu khi component mount
     dispatch(fetchListLich());
   }, [dispatch]);
 
-  // Debugging dữ liệu từ Redux Store
-  useEffect(() => {
-    if (data) {
-      console.log("Dữ liệu list lich chiếu:", data); // Kiểm tra dữ liệu trong Redux Store
-    }
-  }, [data]);
-
-  // Nếu dữ liệu đang được tải, hiển thị Loading
-  if (loading) return <p>Loading...</p>;
-  
-  // Nếu có lỗi trong quá trình fetch dữ liệu, hiển thị thông báo lỗi
-  if (error) return <p>Error: {error}</p>;
-
-  // Render danh sách phim và lịch chiếu
+  // Render danh sách lịch chiếu
   const renderListLich = () => {
-    if (Array.isArray(data) && data.length > 0) {
-      return data.map((cumRap, index) => {
-        console.log("Kiểm tra cumRap:", cumRap); 
-        console.log("Kiểm tra cumRap có danh sách phim:", cumRap.danhSachPhim);  // Log toàn bộ đối tượng cumRap để kiểm tra
-        // Kiểm tra sự tồn tại của 'danhSachPhim'
-        if (!cumRap.danhSachPhim || !Array.isArray(cumRap.danhSachPhim) || cumRap.danhSachPhim.length === 0) {
-          console.log(`Không có phim trong cụm rạp ${cumRap.tenCumRap} (maCumRap: ${cumRap.maCumRap})`);
-          return <p key={index}>Không có phim trong cụm rạp này.</p>;
-        }
-  
-        // Render danh sách phim trong cụm rạp
-        return cumRap.danhSachPhim.map((phim) => {
-          console.log("Thông tin phim:", phim);  // Log từng phim để kiểm tra
-          return <MovieItem key={phim.maPhim} cumRap={cumRap} phim={phim} />;
-        });
-      });
-    } else {
-      console.log("Không có dữ liệu Lich chiếu");  // Log nếu không có dữ liệu
-      return <p>No Lich available</p>;
-    }
+    if (!data || data.length === 0) return <p>Không có dữ liệu lịch chiếu.</p>;
+
+    return (
+      <div
+        className="overflow-y-auto border rounded-lg shadow-md bg-white"
+        style={{ maxHeight: "600px" }} // Chiều cao cố định
+      >
+        {data.map((heThongRap, index) => (
+          <div key={index} className="mb-8">
+            {/* Tên Hệ Thống Rạp */}
+            <h2 className="text-2xl font-bold mb-4 px-4">
+              {heThongRap.tenHeThongRap}
+            </h2>
+
+            {/* Danh sách cụm rạp */}
+            {heThongRap.lstCumRap.map((cumRap, cumRapIndex) => (
+              <div key={cumRapIndex} className="flex mb-6">
+                {/* Bên trái: Hình ảnh và tên phim */}
+                <div className="w-1/3 border-r p-4 bg-gray-50">
+                  {cumRap.danhSachPhim.map((phim, phimIndex) => (
+                    <div key={phimIndex} className="mb-6">
+                      <img
+                        src={phim.hinhAnh}
+                        alt={phim.tenPhim}
+                        className="w-20 h-28 object-cover rounded-lg mb-2"
+                      />
+                      <p className="text-sm font-semibold text-center">
+                        {phim.tenPhim}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Bên phải: Lịch chiếu */}
+                <div className="w-2/3 p-4">
+                  {cumRap.danhSachPhim.map((phim) => (
+                    <div key={phim.maPhim} className="mb-4">
+                      <h3 className="text-lg font-semibold mb-2">
+                        {phim.tenPhim}
+                      </h3>
+                      <div className="flex flex-wrap gap-4">
+                        {phim.lstLichChieuTheoPhim.map((lichChieu, idx) => (
+                          <div
+                            key={idx}
+                            className="bg-gray-100 px-4 py-2 rounded-lg text-green-600 font-medium"
+                          >
+                            {new Date(
+                              lichChieu.ngayChieuGioChieu
+                            ).toLocaleTimeString("vi-VN", {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
   };
-  
-  
 
   return (
     <div className="container mx-auto mt-10">
-      <h1 className="text-3xl font-semibold text-center mb-6">Danh sách Lịch Chiếu</h1>
-      {renderListLich()}
+      <h1 className="text-3xl font-semibold text-center mb-6">Lịch Chiếu Phim</h1>
+
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p className="text-red-500">{error}</p>
+      ) : (
+        renderListLich()
+      )}
     </div>
   );
 }

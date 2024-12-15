@@ -9,7 +9,7 @@ export default function RenderRap({ raps }) {
   return (
     <div
       id="default-carousel"
-      className="relative w-full overflow-hidden"
+      className="relative w-full h-full overflow-hidden mt-5"
       data-carousel="slide"
     >
       <div className="relative h-56 md:h-96">
@@ -19,7 +19,7 @@ export default function RenderRap({ raps }) {
         >
           {raps.map((rap, index) => (
             <div key={index} className="flex-shrink-0">
-              <img src={rap.logo} alt={`rap-${index}`} className="w-20 object-cover pt-2 pl-3" />
+              <img src={rap.logo} alt={`rap-${index}`} className="w-28 object-cover pt-3 pl-3" />
             </div>
           ))}
         </div>

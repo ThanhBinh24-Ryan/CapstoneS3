@@ -13,7 +13,7 @@ import productSlice from "../Pages/Admin/DeleteProduct/Duck/IndexDusk"
 import addNewUserReducer from "../Pages/Admin/AddUser/Dusk/IndexDusk"
 import editUserSlice from "../Pages/Admin/UpdateUser/Dusk/IndexDuck"
 import registerUserReducer from "../Log/DangKy/Dusk/IndexDusk"
-
+import detailMovieReducer from "../Pages/User/DetailMovePage/duck/reducer"
 const store = configureStore({
   reducer: {
     listBanner: listBannerReducer,
@@ -29,7 +29,7 @@ const store = configureStore({
     addNewUser: addNewUserReducer,
     editUser: editUserSlice,
     registerUser: registerUserReducer,
-
+    detailMovieReducer: detailMovieReducer,
   },
   devTools: process.env.NODE_ENV !== "production", 
   
