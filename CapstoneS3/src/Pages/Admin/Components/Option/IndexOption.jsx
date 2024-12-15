@@ -21,7 +21,7 @@ export default function IndexOption() {
           {/* Menu Item 1 */}
           <li className="mb-4">
             <NavLink
-              to="/admin/dashboard"  // Đường dẫn tới trang Dashboard
+              to="DSNguoiDung"  // Đường dẫn tới trang Dashboard
               className="flex items-center px-4 py-2 text-sm hover:bg-gray-700 rounded-md"
             >
               <span className="mr-2">🙎</span> User
@@ -34,7 +34,7 @@ export default function IndexOption() {
               className="flex items-center px-4 py-2 text-sm hover:bg-gray-700 rounded-md cursor-pointer"
               onClick={toggleUserMenu} // Mở/đóng menu con
             >
-              <span className="mr-2">👥</span> Người dùng
+              <span className="mr-2">👥</span> Films
             </div>
             
             {/* Submenu for "Người dùng" */}
@@ -42,7 +42,7 @@ export default function IndexOption() {
               <ul className="pl-6 mt-2">
                 <li className="mb-2">
                   <NavLink
-                    to="/admin/films"  // Đường dẫn tới trang Films
+                    to="admin"  // Đường dẫn tới trang Films
                     className="flex items-center px-4 py-2 text-sm hover:bg-gray-700 rounded-md"
                   >
                     📽️ Films
@@ -50,7 +50,7 @@ export default function IndexOption() {
                 </li>
                 <li className="mb-2">
                   <NavLink
-                    to="/admin/addnew"  // Đường dẫn tới trang Add New
+                    to="/add-product"  // Đường dẫn tới trang Add New
                     className="flex items-center px-4 py-2 text-sm hover:bg-gray-700 rounded-md"
                   >
                     ➕ Add New
@@ -61,7 +61,7 @@ export default function IndexOption() {
           </li>
           <li className="mb-4">
             <NavLink
-              to="/admin/dashboard"  // Đường dẫn tới trang Dashboard
+              to="/DSNguoiDung"  // Đường dẫn tới trang Dashboard
               className="flex items-center px-4 py-2 text-sm hover:bg-gray-700 rounded-md"
             >
               <span className="mr-2">🖥️</span> Showtime

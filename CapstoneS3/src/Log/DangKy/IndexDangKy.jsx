@@ -1,137 +1,174 @@
-import React from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { NavLink } from "react-router-dom";
-import "./Sass/DangKy.scss"; // Đảm bảo bạn đã import file CSS
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../DangKy/Dusk/IndexDusk"; // Đảm bảo đường dẫn đúng đến action
+import "./Sass/DangKy.scss"; // Đảm bảo bạn đã import file CSS đúng
+import { Link } from "react-router-dom";
 
 export default function IndexDangKy() {
-  // Schema validation sử dụng Yup
-  const validationSchema = Yup.object({
-    username: Yup.string()
-      .required("Tài khoản không được để trống")
-      .min(6, "Tài khoản phải có ít nhất 6 ký tự")
-      .max(20, "Tài khoản không được quá 20 ký tự"),
+  const dispatch = useDispatch();
+  const { loading, error, notification } = useSelector(
+    (state) => state.registerUser
+  );
 
-    password: Yup.string()
-      .required("Mật khẩu không được để trống")
-      .min(8, "Mật khẩu phải có ít nhất 8 ký tự")
-      .matches(/[A-Z]/, "Mật khẩu phải chứa ít nhất 1 chữ cái in hoa")
-      .matches(/[0-9]/, "Mật khẩu phải chứa ít nhất 1 chữ số"),
-
-    confirmPassword: Yup.string()
-      .required("Bạn phải xác nhận lại mật khẩu")
-      .oneOf([Yup.ref("password"), null], "Mật khẩu không khớp"),
-
-    email: Yup.string()
-      .email("Email không hợp lệ")
-      .required("Email không được để trống"),
-
-    phone: Yup.string()
-      .matches(/^[0-9]{10}$/, "Số điện thoại phải có 10 chữ số")
-      .required("Số điện thoại không được để trống"),
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+    email: "",
+    phone: "",
+    maNhom: "GP01", // Mã nhóm mặc định
+    hoTen: "",
   });
 
-  // Hàm xử lý khi form được submit
-  const handleSubmit = (values) => {
-    console.log(values);
-    // Thực hiện đăng ký (gửi dữ liệu lên server)
+  const [errors, setErrors] = useState({});
+
+  // Xử lý thay đổi input
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Xác thực form
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.username) newErrors.username = "Tài khoản không được để trống";
+    if (!formData.password) newErrors.password = "Mật khẩu không được để trống";
+    if (formData.password !== formData.confirmPassword)
+      newErrors.confirmPassword = "Mật khẩu không khớp";
+    if (!formData.email) newErrors.email = "Email không được để trống";
+    if (!formData.phone) newErrors.phone = "Số điện thoại không được để trống";
+    if (!formData.hoTen) newErrors.hoTen = "Họ tên không được để trống";
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Xử lý submit form
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    const userData = {
+      taiKhoan: String(formData.username),
+      matKhau: String(formData.password),
+      email: String(formData.email),
+      soDt: String(formData.phone),
+      maNhom: String(formData.maNhom),
+      hoTen: String(formData.hoTen),
+    };
+
+    dispatch(registerUser(userData));
   };
 
   return (
     <div className="form-wrapper">
-      <div className="form-container">
-        <Formik
-          initialValues={{
-            username: "",
-            password: "",
-            confirmPassword: "",
-            email: "",
-            phone: "",
-          }}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          <Form>
-            <div>
-              <label htmlFor="username">Tài khoản</label>
-              <Field type="text" id="username" name="username" />
-              <ErrorMessage
-                name="username"
-                component="div"
-                className="error-message"
-              />
-            </div>
+      <div className="form-container scrollable-form">
+        <h2 className="form-title">Đăng Ký Tài Khoản</h2>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>Tài khoản</label>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+            />
+            {errors.username && <div className="error-message">{errors.username}</div>}
+          </div>
 
-            <div>
-              <label htmlFor="password">Mật khẩu</label>
-              <Field type="password" id="password" name="password" />
-              <ErrorMessage
-                name="password"
-                component="div"
-                className="error-message"
-              />
-            </div>
+          <div>
+            <label>Mật khẩu</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            {errors.password && <div className="error-message">{errors.password}</div>}
+          </div>
 
-            <div>
-              <label htmlFor="confirmPassword">Nhập lại mật khẩu</label>
-              <Field
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-              />
-              <ErrorMessage
-                name="confirmPassword"
-                component="div"
-                className="error-message"
-              />
-            </div>
+          <div>
+            <label>Nhập lại mật khẩu</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+            />
+            {errors.confirmPassword && (
+              <div className="error-message">{errors.confirmPassword}</div>
+            )}
+          </div>
 
-            <div>
-              <label htmlFor="email">Email</label>
-              <Field type="email" id="email" name="email" />
-              <ErrorMessage
-                name="email"
-                component="div"
-                className="error-message"
-              />
-            </div>
+          <div>
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            {errors.email && <div className="error-message">{errors.email}</div>}
+          </div>
 
-            <div>
-              <label htmlFor="phone">Số điện thoại</label>
-              <Field type="text" id="phone" name="phone" />
-              <ErrorMessage
-                name="phone"
-                component="div"
-                className="error-message"
-              />
-            </div>
+          <div>
+            <label>Số điện thoại</label>
+            <input
+              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+            />
+            {errors.phone && <div className="error-message">{errors.phone}</div>}
+          </div>
 
-            <button type="submit">
-              <NavLink
-                to="DangNhap"
-                className={({ isActive }) => (isActive ? "text-blue-700" : "")}
-                aria-current="page"
-              >
-                Đăng ký
-              </NavLink>
-            </button>
+          <div>
+            <label>Họ tên</label>
+            <input
+              type="text"
+              name="hoTen"
+              value={formData.hoTen}
+              onChange={handleChange}
+            />
+            {errors.hoTen && <div className="error-message">{errors.hoTen}</div>}
+          </div>
 
-            <div className="login-link">
-              <p>
-                Đã có tài khoản?{" "}
-                <NavLink
-                  to="DangNhap"
-                  className={({ isActive }) =>
-                    isActive ? "text-blue-700" : ""
-                  }
-                  aria-current="page"
-                >
-                  Đăng nhập
-                </NavLink>
-              </p>
+          <div>
+            <label>Mã nhóm</label>
+            <input
+              type="text"
+              name="maNhom"
+              value={formData.maNhom}
+              onChange={handleChange}
+            />
+          </div>
+
+          <button type="submit" disabled={loading}>
+            {loading ? "Đang đăng ký..." : "Đăng ký"}
+          </button>
+
+          {/* Hiển thị thông báo thành công và lỗi */}
+          {notification && (
+            <div className="success-message">{notification}</div>
+          )}
+          {error && (
+            <div className="error-message">
+              {typeof error === "object" ? JSON.stringify(error) : error}
             </div>
-          </Form>
-        </Formik>
+          )}
+
+          <div className="login-link">
+            <p>
+              Đã có tài khoản?{" "}
+              <Link to="/DangNhap" className="text-blue-700">
+                Đăng nhập
+              </Link>
+            </p>
+          </div>
+        </form>
       </div>
     </div>
   );

@@ -80,4 +80,39 @@
   .form-container .login-link a:hover {
     text-decoration: underline;
   }
-  
+  /* Tạo kích thước và thanh trượt cho form */
+.scrollable-form {
+  max-height: 500px; /* Chiều cao tối đa của form */
+  overflow-y: auto; /* Tạo thanh cuộn dọc khi nội dung dài */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style cho error và success messages */
+.error-message {
+  color: red;
+  font-size: 12px;
+}
+
+.success-message {
+  color: green;
+  font-size: 12px;
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.form-container {
+  width: 400px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

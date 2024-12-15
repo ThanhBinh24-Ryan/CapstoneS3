@@ -1,6 +1,7 @@
 import React from "react";
 import "../../components/Sass/Componnts.scss";
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 export default function IndexHeader() {
   return (
     <div>

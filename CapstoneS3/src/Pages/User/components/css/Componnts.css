@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/* Đặt style cho các nút trong class button-group */
+/* Style cho nút đăng ký */
+.button-group1 {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 1px 1px 5px;
+  margin-left: 5px;
+}
+
+/* Style cho nút đăng nhập */
+.button-group2 {
+  background-color: #007BFF;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 1px 1px 5px;
+  margin-left: 5px;
+}/*# sourceMappingURL=Componnts.css.map */

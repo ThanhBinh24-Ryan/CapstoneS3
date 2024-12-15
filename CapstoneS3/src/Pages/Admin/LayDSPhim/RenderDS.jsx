@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import IndexDS from "./IndexDS";  // Đảm bảo đúng đường dẫn tới component IndexDS
 import { fetchDanhSach } from "../../Admin/LayDSPhim/Dusk/IndexDusk";  // Đảm bảo đúng đường dẫn tới action fetch
-
+import './Sass/Layds.scss'
 export default function RenderDS() {
   const dispatch = useDispatch();
 
@@ -45,12 +45,12 @@ export default function RenderDS() {
   };
 
   return (
-    <div className="container mx-auto p-5">
+    <div className=" container mx-auto p-5">
       <h2 className="text-2xl font-bold text-center mb-5">Danh Sách Phim</h2>
-      <div className="overflow-x-auto">
+      <div className="dsphim overflow-x-auto">
         <table className="min-w-full table-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <TableHeader />
-          <tbody>{renderList()}</tbody>
+          <tbody className="">{renderList()}</tbody>
         </table>
       </div>
     </div>

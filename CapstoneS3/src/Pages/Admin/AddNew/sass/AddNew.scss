@@ -1,0 +1,112 @@
+/* Toàn bộ form */
+.add-product-container {
+    padding: 20px;
+    margin-left: 20px; /* Đặt form cách lề trái 20px */
+  }
+  
+  /* Header */
+  .add-product-header h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Các nhóm input trong form */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Các input text, textarea */
+  input[type="text"], input[type="number"], textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* Thêm border cho input */
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    outline: none; /* Loại bỏ outline khi focus */
+    transition: border-color 0.3s ease;
+  }
+  
+  input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
+    border-color: #007bff; /* Thêm màu border khi focus */
+  }
+  
+  /* Placeholder cho input text */
+  input::placeholder, textarea::placeholder {
+    color: #888;
+  }
+  
+  /* Định dạng cho label */
+  label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Thiết kế cho checkbox thành dạng rượt */
+  input[type="checkbox"] {
+    appearance: none; /* Loại bỏ kiểu mặc định của checkbox */
+    width: 30px;
+    height: 16px;
+    background-color: #ccc;
+    border-radius: 50px;
+    position: relative;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  input[type="checkbox"]:checked {
+    background-color: #007bff; /* Màu khi checkbox được chọn */
+  }
+  
+  input[type="checkbox"]:before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+  
+  input[type="checkbox"]:checked:before {
+    transform: translateX(14px); /* Di chuyển nút "rượt" khi được chọn */
+  }
+  
+  /* Đặt form input và checkbox cách lề trái 20px */
+  .form-group {
+    margin-left: 20px;
+  }
+  
+  /* Căn chỉnh checkbox */
+  .form-group input[type="checkbox"] {
+    margin-left: 0;
+    display: inline-block;
+  }
+  
+  /* Thêm kiểu cho nút Submit */
+  button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  .dsphim {
+    max-height: 500px; /* Đặt chiều cao tối đa cho phần tử */
+    overflow-y: auto; /* Thêm thanh cuộn dọc (vertical scrollbar) */
+    padding-right: 10px; /* Để tránh thanh cuộn che mất nội dung */
+  }

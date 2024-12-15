@@ -1,0 +1,6 @@
+.editProduct-container {
+    max-height: 500px; /* Đặt chiều cao tối đa cho phần tử */
+    overflow-y: auto; /* Thêm thanh cuộn dọc (vertical scrollbar) */
+    padding-right: 10px; /* Để tránh thanh cuộn che mất nội dung */
+  }
+  

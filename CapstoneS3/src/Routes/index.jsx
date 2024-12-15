@@ -1,5 +1,4 @@
-
-import IndexAdmin from "../Pages/Admin/index"
+import IndexAdmin from "../Pages/Admin/index";
 import ListMovie from "../Pages/User/ListMovie/RenderListMovie";
 import IndexDangKy from "../Log/DangKy/IndexDangKy";
 import IndexDangNhap from "../Log/DangNhap/IndexDangNhap";
@@ -8,8 +7,16 @@ import IndexUser from "../Pages/User";
 import TrangChu from "../Pages/User/TrangChu";
 import IndexDash from "../Pages/Admin/Dashboard/IndexDash";
 import Log from "../Log/Log";
+import AddProductPage from "../Pages/Admin/AddNew/IndexAddNew";
+import EditProductPage from "../Pages/Admin/EditProduct/IndexEditProduct";
+import IndexDeleteProduct  from "../Pages/Admin/DeleteProduct/IndexDeleteProduct";
+import IndexDSND from "../Pages/Admin/LayDSNguoiDung/IndexDSNguoiDung";
+import RenderDSND from "../Pages/Admin/LayDSNguoiDung/RenderDSNguoiDung";
+import AddUserPage from "../Pages/Admin/AddUser/IndexAddUser";
+import EditUserPage from "../Pages/Admin/UpdateUser/IndexUpdateUser";
 
-// import
+
+
 const routes = [
   {
     path: "",
@@ -23,7 +30,7 @@ const routes = [
       //   path: "DangNhap",
       //   element: IndexDangNhap,
       // },
-      
+
       // {
       //   path: "",
       //   element: ListMovie,
@@ -50,32 +57,49 @@ const routes = [
     path: "",
     element: IndexAdmin,
     children: [
-       {
+      {
         path: "admin",
-       element: IndexDash,
+        element: IndexDash,
       },
-      // {
-      //   path: "add-user",
-      //   element: AddUserPage,
-      // },
+      {
+        path: "add-product",
+        element:AddProductPage,
+      },
+      {
+        path: "editProduct/:id",
+        element: EditProductPage,
+      },
+      {
+        path: "delete-product/:id",
+        element: IndexDeleteProduct,
+      },
+      {
+        path: "DSNguoiDung",
+        element: RenderDSND,
+      },
+      {
+        path: "AddUser",
+        element: AddUserPage,
+      },
+      {
+        path: "EditUser/:taiKhoan",
+        element: EditUserPage ,
+      },
     ],
   },
   {
     path: "",
     element: Log,
     children: [
-       {
-  
-    path: "DangNhap",
-    element: IndexDangNhap,
-  
-  },
-  {
-    path: "Dangky",
-    element: IndexDangKy,
-  
-  },
-]
+      {
+        path: "DangNhap",
+        element: IndexDangNhap,
+      },
+      {
+        path: "Dangky",
+        element: IndexDangKy,
+      },
+    ],
   },
   // {
   //   path: "auth",
